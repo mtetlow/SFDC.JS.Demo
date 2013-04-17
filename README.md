@@ -4,7 +4,7 @@ This is a demonstration of the capabilities of JavaScript as used within the Sal
 The practical example of the demonstration is to quickly add products to an opportunity. This is **not** production ready. The intention is to give a developer guidance and real world examples of how to leverage JavaScript and RemoteActions in Salesforce.
 
 As seen at Denver Developer User Group on 4/16/2013.
-![ScreenShot](http://raw.github.com/mtetlow/SFDC.JS.Demo/master/screenshot.png)
+![ScreenShot](https://raw.github.com/mtetlow/SFDC.JS.Demo/master/screenshot.png)
 ##File Explanations
 * [pages/oppProductQuickAdd.page](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/pages/oppProductQuickAdd.page) - This is the VisualForce page where we display and edit the products assigned to an opportunity. This is currently setup to be used in the standard opportunity page layout, however it can be easily converted to a standalone VF page by defining the opportunity record Id [here](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/pages/oppProductQuickAdd.page#L14-15).
 * [classes/oppProductQuickAdd.cls](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/classes/oppProductQuickAdd.cls)  - This is the Apex class where will house all of our server sided methods. Notice the VF Page references this controller as an extension, while using the standard opportunity controller.
