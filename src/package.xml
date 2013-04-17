@@ -5,7 +5,7 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>oppProductQuickAdd</members>
 		<name>ApexPage</name>
 	</types>
 	<types>
