@@ -1,5 +1,4 @@
-# Salesforce JavaScript Demo (Denver Developer User Group - 4/16/2013)
-
+# Salesforce JavaScript Demo
 This is a demonstration of the capabilities of JavaScript as used within the Salesforce.com platform. This provides practical examples of JavaScript Remote Actions, DOM Manipulation, and Libraries to make development considerably easier. These examples are shown in the context of a custom VisualForce page as well as being integrated into a standard Salesforce page.
 
 The practical example of the demonstration is to quickly add products to an opportunity. This is **not** production ready. The intention is to give a developer guidance and real world examples of how to leverage JavaScript and RemoteActions in Salesforce.
