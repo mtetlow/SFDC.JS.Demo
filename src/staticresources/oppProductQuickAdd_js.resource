@@ -74,8 +74,6 @@ function updateTotals(){
 		total=total+(unitPrice*qty);
 	});
 	sendPostMessage(accounting.formatMoney(total));
-	//parent.document.getElementById('test').innerHTML='hello there';
-	//parent.updateOppTotals('hello');
 }
 
 function pushUpdate(){
@@ -84,7 +82,7 @@ function pushUpdate(){
 	$j('.lineitem').each(function(){
 		var lineItem={};
 		lineItem['Quantity']=parseFloat($j(this).find('.lineitem-product-qty').val());
-		//This is read only??? WTF?
+		//This is read only??? SFDC Documentation says you can't update a product on a opportunity, have to delete line and recreate.
 		lineItem['PricebookEntryId']=$j(this).find('.lineitem-product-name').attr('pricebookid');
 		lineItem['TotalPrice']=parseFloat($j(this).find('.lineitem-opp-price').val());
 		//Can't update any id's because we can't change the product name. delete them all and start over.
