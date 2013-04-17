@@ -4,7 +4,7 @@
 	$j=jQuery.noConflict();
 	$j(document).ready(function(){ 
 		function listener(event){
-		  console.log(event);
+		  if(event.origin !== "https://c.na15.visual.force.com"){ return; }
 		  $j('#opp7_ileinner').html(event.data);
 		}
 
