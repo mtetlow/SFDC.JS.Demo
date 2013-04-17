@@ -26,7 +26,7 @@ $j(document).ready(function(){
 });
 
 function refreshFromServer(){
-	oppcreator.getLineItemsForOpp(currentOppId,function(result,status){
+	oppProductQuickAdd.getLineItemsForOpp(currentOppId,function(result,status){
 		refreshTableContents(result);
 	});
 }
@@ -58,7 +58,7 @@ function attachLineItemMethods(){
 
 	$j('.remove-line-item').click(function(){
 		var lineItemId=$j(this).closest('.lineitem').find('.lineitem-product-name').attr('lineitemid');
-		oppcreator.deleteOppLineItem(lineItemId,currentOppId,function(result,status){
+		oppProductQuickAdd.deleteOppLineItem(lineItemId,currentOppId,function(result,status){
 			refreshTableContents(result);
 		});
 	});
@@ -93,7 +93,7 @@ function pushUpdate(){
 		newLineItems.push(lineItem);
 		i++;
 	});
-	oppcreator.upsertLineItemsForOpp(currentOppId,newLineItems,function(result,status){
+	oppProductQuickAdd.upsertLineItemsForOpp(currentOppId,newLineItems,function(result,status){
 		refreshTableContents(result);
 	});
 }
