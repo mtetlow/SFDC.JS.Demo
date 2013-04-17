@@ -21,7 +21,8 @@ As seen at Denver Developer User Group on 4/16/2013.
 ##Replicating this demo in your own Development Org
 * First deploy these files using your favorite method. Eclipse IDE, MavensMate, or plain old copy pasting into the Setup UI.
 * Now you should be able to view the VisualForce page and see it working by pasting in a valid Opportunity record Id and swapping the comments [here](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/pages/oppProductQuickAdd.page#L14-15)
-###Integrating into the Standard Opportunity page
+
+### Integrating into the Standard Opportunity page
 * Add the VisualForce page to the Opportunity layout by going to Setup -> Customize -> Opportunities -> Page Layouts -> Opportunity Layout, clicking Edit, selecting Visualforce Pages in the WYSIWYG Editor and dragging it down to somewhere in the page layout where it can be 100% width and ~400px tall. Click Save.
 * Now you should be able to see the quick product add UI on the standard layout page. Make sure to fix [this](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/pages/oppProductQuickAdd.page#L14-15), if you edited it earlier. You should notice a UX bug pretty quick. The standard Opportunity Detail section does not update with the changes from your Remote Action updates. This is where we need to get creative with the cross-domain mumbo jumbo.
 * So what can modify the DOM on the Standard Page? Javascript on the standard page! How do we do that? We can inject via a homepage component with the type HTML area. The Procedure for this is to go to Setup -> Customize -> Home -> Home Page Components -> New Custom Components, then create a new component with name OppQuickAddInjection with type HTML area. Then you can check the Show HTML checkbox in the editor and paste in [this JavaScript](https://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/home_page_component_injection.js). Select Narrow (Left) Column and hit Save. 
