@@ -12,6 +12,18 @@ The overall goal of the demonstration is to quickly add products to an opportuni
 * [staticresources/jsplugins.resource](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/jsplugins.resource) - This zip file contains all of the JavaScript / CSS Libraries we are using. It's contents can be easily viewed [here](http://github.com/mtetlow/SFDC.JS.Demo/tree/master/resource-bundles/jsplugins.resource)
 * [staticresources/home_page_component_injection.js](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/home_page_component_injection.js) - This JavaScript is injected into the standard Salesforce page by using a home page component added into the Sidebar layout.
 
-##Creating this demo in your own dev org
-* First you have to deploy these files using your favorite method. Eclipse IDE, MavensMate, or plain ole copy pasting into the Setup UI.
-* 
+##Editing Standard Page DOM / Cross-Domain Considerations
+* Adding a VisualForce page into the standard page layout is made pretty simple with the WYSIWYG Page Layout editor. Unfortunately, this loads your VisualForce page (from the domain < instance number >.visual.force.com) into the standard page (from the domain < instance number >.salesforce.com). This complicates our life, as an iframes from a different domain are isolated within the browser. You cannot parse the contents nor execute any functions using JavaScript from one domain to the other.
+* Our solution to this is to use the HTML5 method [window.PostMessage](https://developer.mozilla.org/en-US/docs/DOM/window.postMessage). What this allows is passing messages via the browser's main window object. You will have a listener method on the standard salesforce page and another method to send a message from the iframe.
+* The pertinent JS for this can be viewed at [iframe side](https://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/oppProductQuickAdd_js.resource#L107-109) and [standard page side](https://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/home_page_component_injection.js#L6-L15)
+
+##Replicating this demo in your own Development Org
+* First deploy these files using your favorite method. Eclipse IDE, MavensMate, or plain old copy pasting into the Setup UI.
+* Now you should be able to view the VisualForce page and see it working by switching in a valid Opportunity record Id and swapping the comments [here](http://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/pages/oppProductQuickAdd.page#L14-15)
+###Integrating into the Standard Opportunity page
+* Add the VisualForce page to the Opportunity layout by going to Setup -> Customize -> Opportunities -> Page Layouts -> Opportunity Layout, clicking Edit, selecting Visualforce Pages in the WYSIWYG Editor and dragging it down to somewhere in the page layout where it can be 100% width and ~400px tall. Click Save.
+* Now you should be able to see the quick product add UI on the standard layout page. However you should notice a bug pretty quick. The standard Opportunity Detail section does not update with the changes from your Remote Action updates. This is where we need to get creative with the cross-domain mumbo jumbo.
+* So what can modify the DOM on the Standard Page? Javascript on the standard page! How do we do that? We can inject via a homepage component with the type HTML area. The Procedure for this is to go to Setup -> Customize -> Home -> Home Page Components -> New Custom Components, then create a new component with name OppQuickAddInjection with type HTML area. Then you can check the Show HTML checkbox in the editor and paste in [this JavaScript](https://github.com/mtetlow/SFDC.JS.Demo/blob/master/src/staticresources/home_page_component_injection.js). Select Narrow (Left) Column and hit Save
+* Now we need to add our new component to the sidebar layout by Going to Setup -> Customize -> Home -> Home Page Layouts, editing the appropriate layouts, checking OppQuickAddInjection and hitting Next & Save.
+* In order to show this custom component on all pages we have to tweak a setting located at Setup -> Customize -> User Interface. Check "Show Custom Sidebar Components on All Pages" and hit save.
+* Now when you go back to the opportunity page and use the widget you should see the Opportunity Detail "Amount" field changing as you make updates in the widget.
