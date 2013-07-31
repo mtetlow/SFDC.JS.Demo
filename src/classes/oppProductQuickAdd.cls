@@ -8,9 +8,6 @@ global with sharing class oppProductQuickAdd {
         for(Product2 dbItem : [SELECT Id,Name,(SELECT Id,UnitPrice FROM PriceBookEntries WHERE PriceBook2.Name=:this.pricebook)  FROM Product2]){
             returnList.add(new productInfoItem(dbItem.Name,dbItem.Id, dbItem.PriceBookEntries[0].Id, dbItem.PriceBookEntries[0].UnitPrice));
         }
-
-
-
         return JSON.serialize(returnList);
     } set;}
 

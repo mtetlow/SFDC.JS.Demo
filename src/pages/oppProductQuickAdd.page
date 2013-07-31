@@ -14,7 +14,6 @@
         var currentOppId="{!JSENCODE(Opportunity.Id)}";
         //var currentOppId="006i0000002KWdj";
     </script>
-    <input id="oppTotalString" style="display:none;"></input>
     <!-- Container for our namespaced version of bootstrap -->
     <div class="twitter-bs">
         <div class="row-fluid">
